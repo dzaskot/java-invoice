@@ -44,7 +44,7 @@ public class InvoiceTest {
 	}
 
 	@Test
-	public void testInvoiceHasProperSubtotalForManyProducts() {
+	public void testInvoiceHasProperGrossPriceForManyProducts() {
 		invoice.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("200")));
 		invoice.addProduct(new DairyProduct("Maslanka", new BigDecimal("100")));
 		invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
@@ -63,7 +63,7 @@ public class InvoiceTest {
 	}
 
 	@Test
-	public void testInvoiceHasProperTotalValueForManyProduct() {
+	public void testInvoiceHasProperNetPriceValueForManyProduct() {
 		// price with tax: 200
 		invoice.addProduct(new TaxFreeProduct("Maskotki", new BigDecimal("200")));
 		// price with tax: 108
@@ -74,7 +74,7 @@ public class InvoiceTest {
 	}
 
 	@Test
-	public void testInvoiceHasPropoerSubtotalWithQuantityMoreThanOne() {
+	public void testInvoiceHasPropoerGrossPriceWithQuantityMoreThanOne() {
 		// 2x kubek - price: 10
 		invoice.addProduct(new TaxFreeProduct("Kubek", new BigDecimal("5")), 2);
 		// 3x kozi serek - price: 30
@@ -85,7 +85,7 @@ public class InvoiceTest {
 	}
 
 	@Test
-	public void testInvoiceHasPropoerTotalWithQuantityMoreThanOne() {
+	public void testInvoiceHasPropoerNetPriceWithQuantityMoreThanOne() {
 		// 2x chleb - price with tax: 10
 		invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
 		// 3x chedar - price with tax: 32.40
