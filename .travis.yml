@@ -1,4 +1,4 @@
 language: java
 script: 
-    -mvn test
-    -mvn checkstyle:check
+  -mvn test
+  -mvn checkstyle:check
