@@ -61,7 +61,8 @@ public class Invoice {
     public String print() {
         StringBuilder invoicePrint = new StringBuilder();
         invoicePrint.append(this.number);
-        //invoicePrint.append(System.lineSeparator());
+        invoicePrint.append(System.lineSeparator());
+        invoicePrint.append(products.size());
         return invoicePrint.toString();
     }
 }

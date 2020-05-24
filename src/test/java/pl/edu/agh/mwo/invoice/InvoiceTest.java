@@ -131,4 +131,10 @@ public class InvoiceTest {
         String output = invoice.print();
         Assert.assertEquals(String.valueOf(invoice.getNumber()),output.split("\n")[0]);
     }
+
+    @Test
+    public void testPrintInvoiceLastLineNoProducts(){
+        String output = invoice.print();
+        Assert.assertEquals(String.valueOf(0),output.split("\n")[1]);
+    }
 }
