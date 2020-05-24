@@ -57,4 +57,11 @@ public class Invoice {
     public int getNumber() {
         return this.number;
     }
+
+    public String print() {
+        StringBuilder invoicePrint = new StringBuilder();
+        invoicePrint.append(this.number);
+        //invoicePrint.append(System.lineSeparator());
+        return invoicePrint.toString();
+    }
 }

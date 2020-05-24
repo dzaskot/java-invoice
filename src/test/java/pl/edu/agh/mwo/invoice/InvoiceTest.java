@@ -125,4 +125,10 @@ public class InvoiceTest {
     	int number2 = new Invoice().getNumber();
     	Assert.assertEquals(number,number2-1);
     }
+
+    @Test
+    public void testPrintInvoiceNumberInFirstLine(){
+        String output = invoice.print();
+        Assert.assertEquals(String.valueOf(invoice.getNumber()),output.split("\n")[0]);
+    }
 }
