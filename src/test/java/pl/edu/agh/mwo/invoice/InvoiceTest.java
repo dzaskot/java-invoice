@@ -1,6 +1,8 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Locale;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -136,5 +138,29 @@ public class InvoiceTest {
     public void testPrintInvoiceLastLineNoProducts(){
         String output = invoice.print();
         Assert.assertEquals(String.valueOf(0),output.split("\n")[1]);
+    }
+
+    @Test
+    public void testPrintInvoiceLastLineManyProducts(){
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
+        invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        String output = invoice.print();
+        Assert.assertEquals(String.valueOf(3),output.split("\n")[4]);
+    }
+
+    @Test
+    public void testPrintInvoicePrintQuantityCheckPrice(){
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")),6);
+        String output = invoice.print();
+        Assert.assertEquals(String.valueOf(30),output.split("\n")[1].split(" ")[2]);
+    }
+
+    @Test
+    public void testPrintInvoicePrintQuantityManyElements(){
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")),6);
+        invoice.addProduct(new DairyProduct("Majonez", new BigDecimal("4")),100);
+        String output = invoice.print();
+        Assert.assertEquals(String.format(Locale.ENGLISH,"%.2f", 432.00),output.split("\n")[2].split(" ")[2]);
     }
 }
