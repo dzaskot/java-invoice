@@ -120,7 +120,7 @@ public class InvoiceTest {
     }
     
     @Test
-    public void testTwoInvoicesHaveConsequentNumbersr(){
+    public void testTwoInvoicesHaveConsequentNumbers(){
     	int number = invoice.getNumber();
     	int number2 = new Invoice().getNumber();
     	Assert.assertEquals(number,number2-1);

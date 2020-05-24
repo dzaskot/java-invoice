@@ -7,11 +7,14 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
 
+    private static int previousNumber;
+
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
     private int number;
     
-    public Invoice(){
-        //this.number =
+    public Invoice() {
+        this.number = previousNumber + 1;
+        previousNumber = this.number;
     }
 
     public void setNumber(int number) {
