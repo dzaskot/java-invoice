@@ -131,13 +131,13 @@ public class InvoiceTest {
     @Test
     public void testPrintInvoiceNumberInFirstLine(){
         String output = invoice.print();
-        Assert.assertEquals(String.valueOf(invoice.getNumber()),output.split("\n")[0]);
+        Assert.assertEquals(String.valueOf(invoice.getNumber()),output.split(System.lineSeparator())[0]);
     }
 
     @Test
     public void testPrintInvoiceLastLineNoProducts(){
         String output = invoice.print();
-        Assert.assertEquals(String.valueOf(0),output.split("\n")[1]);
+        Assert.assertEquals(String.valueOf(0),output.split(System.lineSeparator())[1]);
     }
 
     @Test
@@ -146,21 +146,29 @@ public class InvoiceTest {
         invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         String output = invoice.print();
-        Assert.assertEquals(String.valueOf(3),output.split("\n")[4]);
+        Assert.assertEquals(String.valueOf(3),output.split(System.lineSeparator())[4]);
     }
 
     @Test
     public void testPrintInvoicePrintQuantityCheckPrice(){
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")),6);
         String output = invoice.print();
-        Assert.assertEquals(String.valueOf(30),output.split("\n")[1].split(" ")[2]);
+        Assert.assertEquals(String.format(Locale.ENGLISH,"%.2f",30.00),output.split(System.lineSeparator())[1].split(" ")[2]);
     }
 
     @Test
-    public void testPrintInvoicePrintQuantityManyElements(){
+    public void testPrintInvoicePrintPriceManyElements(){
+        Invoice invoice2 = new Invoice();
+        invoice2.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")),6);
+        invoice2.addProduct(new DairyProduct("Majonez", new BigDecimal("4")),100);
+        String output = invoice2.print();
+        Assert.assertEquals(String.format(Locale.ENGLISH,"%.2f", 432.00),output.split(System.lineSeparator())[2].split(" ")[2]);
+    }
+
+    @Test
+    public void testPrintInvoiceProductHasProperName(){
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")),6);
-        invoice.addProduct(new DairyProduct("Majonez", new BigDecimal("4")),100);
         String output = invoice.print();
-        Assert.assertEquals(String.format(Locale.ENGLISH,"%.2f", 432.00),output.split("\n")[2].split(" ")[2]);
+        Assert.assertEquals("Chleb",output.split(System.lineSeparator())[1].split(" ")[0]);
     }
 }

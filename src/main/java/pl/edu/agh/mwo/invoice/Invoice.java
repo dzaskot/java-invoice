@@ -3,7 +3,9 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -60,16 +62,21 @@ public class Invoice {
     }
 
     public String print() {
+
         StringBuilder invoicePrint = new StringBuilder();
         invoicePrint.append(this.number);
         invoicePrint.append(System.lineSeparator());
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            String productLine = entry.getKey() + " "
-                    + entry.getValue() + " "
-                    + entry.getKey().getPriceWithTax().multiply(new BigDecimal(entry.getValue())).setScale(2, RoundingMode.CEILING)
-                    + "\n";
-            invoicePrint.append(productLine);
-            //invoicePrint.append(System.lineSeparator());
+        List<String> productsList = products.entrySet().stream()
+                .map(entry -> entry.getKey().getName() + " "
+                        + entry.getValue() + " "
+                        + entry.getKey().getPriceWithTax()
+                        .multiply(new BigDecimal(entry.getValue()))
+                        .setScale(2, RoundingMode.CEILING))
+                .sorted()
+                .collect(Collectors.toList());
+        for (String p : productsList) {
+            invoicePrint.append(p);
+            invoicePrint.append(System.lineSeparator());
         }
         invoicePrint.append(products.size());
 
