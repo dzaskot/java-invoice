@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice.product;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -53,5 +54,17 @@ public class ProductTest {
     @Test(expected = IllegalArgumentException.class)
     public void testProductWithNegativePrice() {
         new TaxFreeProduct("Mandarynki", new BigDecimal("-1.00"));
+    }
+
+    @Test
+    public void testBottleOfWinePriceWithExcise() {
+        Product product = new BottleOfWine("Chardonnay", new BigDecimal("100.0"));
+        Assert.assertThat(new BigDecimal("128.56").setScale(2, RoundingMode.CEILING), Matchers.comparesEqualTo(product.getPriceWithTax()));
+    }
+
+    @Test
+    public void testBottleOfWineName() {
+        Product product = new BottleOfWine("Chardonnay", new BigDecimal("100.0"));
+        Assert.assertEquals("Chardonnay", product.getName());
     }
 }
