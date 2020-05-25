@@ -178,7 +178,7 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testInvoiceIncreaseQuantityOfDuplicatedProduct(){
+    public void testQuantityIsSummedForDuplicatedProduct(){
         Product chleb = new TaxFreeProduct("Chleb" , new BigDecimal("5"));
         invoice.addProduct(chleb,6);
         invoice.addProduct(chleb,5);
@@ -186,7 +186,7 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testInvoiceIncreaseByOneQuantityOfDuplicatedProduct(){
+    public void testQuantityIncreasedByOneForConstructorWithProductForDuplicatedProduct(){
         Product chleb = new TaxFreeProduct("Chleb" , new BigDecimal("5"));
         invoice.addProduct(chleb);
         invoice.addProduct(chleb);

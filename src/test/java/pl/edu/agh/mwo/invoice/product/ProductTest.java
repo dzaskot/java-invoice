@@ -59,7 +59,7 @@ public class ProductTest {
     @Test
     public void testBottleOfWinePriceWithExcise() {
         Product product = new BottleOfWine("Chardonnay", new BigDecimal("100.0"));
-        Assert.assertThat(new BigDecimal("128.56").setScale(2, RoundingMode.CEILING), Matchers.comparesEqualTo(product.getPriceWithTax()));
+        Assert.assertThat(new BigDecimal("128.56"), Matchers.comparesEqualTo(product.getPriceWithTax()));
     }
 
     @Test
