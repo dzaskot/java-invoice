@@ -20,10 +20,6 @@ public class Invoice {
         previousNumber = this.number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public void addProduct(Product product) {
         if (!products.containsKey(product)) {
             addProduct(product, 1);
