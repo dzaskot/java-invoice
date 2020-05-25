@@ -25,23 +25,20 @@ public class Invoice {
     }
 
     public void addProduct(Product product) {
-        if(!products.containsKey(product)) {
-        addProduct(product, 1);
-        }
-        else {
-            products.put(product,products.get(product)+1);
+        if (!products.containsKey(product)) {
+            addProduct(product, 1);
+        } else {
+            products.put(product, products.get(product) + 1);
         }
     }
 
     public void addProduct(Product product, Integer quantity) {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
-        }
-        else if (!products.containsKey(product)) {
+        } else if (!products.containsKey(product)) {
             products.put(product, quantity);
-        }
-        else {
-            products.put(product, products.get(product)+quantity);
+        } else {
+            products.put(product, products.get(product) + quantity);
         }
     }
 
@@ -94,9 +91,10 @@ public class Invoice {
     }
 
     public int getProductQuantity(Product product) {
-        if(products.containsKey(product)) {
+        if (products.containsKey(product)) {
             return products.get(product);
+        } else {
+            return 0;
         }
-        else return 0;
     }
 }
