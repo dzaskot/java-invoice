@@ -106,6 +106,11 @@ public class InvoiceTest {
     public void testInvoiceWithNegativeQuantity() {
         invoice.addProduct(new DairyProduct("Zsiadle mleko", new BigDecimal("5.55")), -1);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvoiceWithNoProduct() {
+        invoice.addProduct(null, 10);
+    }
     
     @Test
     public void testInvoiceHasNumber(){
