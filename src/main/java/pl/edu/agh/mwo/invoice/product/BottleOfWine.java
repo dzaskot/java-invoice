@@ -3,15 +3,9 @@ package pl.edu.agh.mwo.invoice.product;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class BottleOfWine extends OtherProduct {
+public class BottleOfWine extends ExciseProduct {
 
     public BottleOfWine(String name, BigDecimal price) {
-        super(name, price);
+        super(name, price, new BigDecimal("0.23"));
     }
-
-    @Override
-    public BigDecimal getPriceWithTax() {
-        return price.multiply(taxPercent).add(price).add(new BigDecimal("5.56"));
-    }
-
 }

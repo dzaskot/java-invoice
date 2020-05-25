@@ -63,6 +63,12 @@ public class ProductTest {
     }
 
     @Test
+    public void testFuelCanisterPriceWithExcise() {
+        Product product = new FuelCanister("Pb95", new BigDecimal("1.0"));
+        Assert.assertThat(new BigDecimal("6.56"), Matchers.comparesEqualTo(product.getPriceWithTax()));
+    }
+
+    @Test
     public void testBottleOfWineName() {
         Product product = new BottleOfWine("Chardonnay", new BigDecimal("100.0"));
         Assert.assertEquals("Chardonnay", product.getName());
