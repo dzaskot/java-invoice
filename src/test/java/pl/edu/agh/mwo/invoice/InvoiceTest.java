@@ -171,4 +171,25 @@ public class InvoiceTest {
         String output = invoice.print();
         Assert.assertEquals("Chleb",output.split(System.lineSeparator())[1].split(" ")[0]);
     }
+
+    @Test
+    public void testProductQuantityEqualsZeroIfItsNotOnInvoice(){
+        Assert.assertEquals(0,invoice.getProductQuantity(new TaxFreeProduct("Chleb" , new BigDecimal("5"))));
+    }
+
+    @Test
+    public void testInvoiceIncreaseQuantityOfDuplicatedProduct(){
+        Product chleb = new TaxFreeProduct("Chleb" , new BigDecimal("5"));
+        invoice.addProduct(chleb,6);
+        invoice.addProduct(chleb,5);
+        Assert.assertEquals(11,invoice.getProductQuantity(chleb));
+    }
+
+    @Test
+    public void testInvoiceIncreaseByOneQuantityOfDuplicatedProduct(){
+        Product chleb = new TaxFreeProduct("Chleb" , new BigDecimal("5"));
+        invoice.addProduct(chleb);
+        invoice.addProduct(chleb);
+        Assert.assertEquals(2,invoice.getProductQuantity(chleb));
+    }
 }

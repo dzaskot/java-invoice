@@ -25,14 +25,24 @@ public class Invoice {
     }
 
     public void addProduct(Product product) {
+        if(!products.containsKey(product)) {
         addProduct(product, 1);
+        }
+        else {
+            products.put(product,products.get(product)+1);
+        }
     }
 
     public void addProduct(Product product, Integer quantity) {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        products.put(product, quantity);
+        else if (!products.containsKey(product)) {
+            products.put(product, quantity);
+        }
+        else {
+            products.put(product, products.get(product)+quantity);
+        }
     }
 
     public BigDecimal getNetTotal() {
@@ -81,5 +91,12 @@ public class Invoice {
         invoicePrint.append(products.size());
 
         return invoicePrint.toString();
+    }
+
+    public int getProductQuantity(Product product) {
+        if(products.containsKey(product)) {
+            return products.get(product);
+        }
+        else return 0;
     }
 }
